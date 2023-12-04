@@ -16,6 +16,14 @@ typedef struct part_number_t
     bool part = false;
 } PartNumber;
 
+typedef struct asterisk_t
+{
+    uint16_t row;
+    uint16_t col;
+    uint8_t parts = 0;
+    uint32_t ratio = 1;
+} Asterisk;
+
 bool isNum(int c)
 {
     if (c >= 48 and c <= 57)
@@ -193,12 +201,154 @@ void Part1(void)
         //printf("%d: %d: %d,\t", p.value, p.check, p.part);
     }
 
-    printf("%d\n", total);
+    printf("the total for part 1 is: %d\n", total);
+}
+
+void findAsterisks(std::vector<Asterisk>& asterisks)
+{
+    std::fstream input("input.txt");
+    std::string input_temp;
+    Asterisk temp;
+    uint16_t row_num = 0;
+
+    while (input >> input_temp)
+    {
+        for (int i = 0; i < input_temp.length(); i++)
+        {
+            if (input_temp[i] == '*')
+            {
+                temp.row = row_num;
+                temp.col = i;
+                asterisks.push_back(temp);
+            }
+        }
+
+        row_num++;
+    }
+}
+
+uint16_t findNum(std::string row, uint16_t col)
+{
+    /* we know that row[col] is a number, and want to find the full number
+    therefore we search backwards from there to find the first non number */
+
+    char buff[4];
+    memset(buff, '\0', 4);
+    uint8_t buff_tick = 0;
+
+    // check not at start of row
+    uint16_t num_start = col + 1;
+    while (num_start)
+    {
+        num_start--;
+        if (!isNum(row[num_start]))
+        {
+            num_start++;
+            break;
+        }
+    }
+
+    uint16_t num_end = col - 1;
+    while (num_end != row.length() - 1)
+    {
+        num_end++;
+        if (!isNum(row[num_end]))
+        {
+            num_end--;
+            break;
+        }
+    }
+
+    for (int i = num_start; i <= num_end; i++)
+    {
+        buff[buff_tick++] = row[i];
+    }
+
+    return atoi(buff);
 }
 
 void Part2(void)
-{
+{    
+    std::vector<Asterisk> asterisks;
 
+    findAsterisks(asterisks);
+
+    for (auto a = asterisks.begin(); a != asterisks.end(); a++)
+    {
+        std::fstream input("input.txt");
+        std::string line;
+        int i = 0;
+        while (i++ != a->row)
+        {
+            input >> line;
+        }
+
+        bool inNum = false;
+
+        // LINE 1
+
+        for (int i = a->col - 1; i <= a->col + 1; i++)
+        {
+            if (isNum(line[i]) and !inNum)
+            {
+                a->parts++;
+                inNum = true;
+                a->ratio *= findNum(line, i);
+            }
+            else if (inNum and !isNum(line[i]))
+            {
+                inNum = false;
+            }
+        }
+
+        input >> line;
+
+        // LINE 2
+
+        if (isNum(line[a->col - 1]))
+        {
+            a->parts++;
+            a->ratio *= findNum(line, a->col - 1);
+        }
+        if (isNum(line[a->col + 1]))
+        {
+            a->parts++;
+            a->ratio *= findNum(line, a->col + 1);
+        }        
+
+        input >> line;
+
+        // LINE 3
+
+        inNum = false;
+
+        for (int i = a->col - 1; i <= a->col + 1; i++)
+        {
+            if (isNum(line[i]) and !inNum)
+            {
+                a->parts++;
+                inNum = true;
+                a->ratio *= findNum(line, i);
+            }
+            else if (inNum and !isNum(line[i]))
+            {
+                inNum = false;
+            }
+        }        
+    }
+
+    uint32_t total = 0;
+
+    for (auto a : asterisks)
+    {
+        //printf("row: %d\tcol: %d\tparts: %d\tratio: %lu\n", a.row, a.col, a.parts, a.ratio);
+        if (a.parts == 2)
+        {
+            total += a.ratio;
+        }
+    }
+
+    printf("the answer for part 2 is: %lu", total);
 }
 
 int main()

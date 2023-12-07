@@ -345,6 +345,7 @@ void Part2(void)
         if (a.parts == 2)
         {
             total += a.ratio;
+            printf("%lu\n", total);
         }
     }
 

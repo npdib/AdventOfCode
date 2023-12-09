@@ -32,7 +32,7 @@ void Part1(std::string instruction, std::map<std::string, Node> Nodes)
         steps++;
     }
 
-    printf("Number of steps in part 1 is: %d", steps);
+    printf("Number of steps in part 1 is: %d\n", steps);
 }
 
 typedef struct test_node_t
@@ -40,39 +40,6 @@ typedef struct test_node_t
     std::string name;
     uint32_t steps = 0;
 } TestNode;
-
-bool allEqual(std::vector<TestNode> nodes)
-{
-    uint32_t prev_steps = nodes[0].steps;
-    for (auto n : nodes)
-    {
-        if (n.steps != prev_steps)
-        {
-            return false;
-        }
-
-        prev_steps = n.steps;
-    }
-
-    return true;
-}
-
-uint8_t findSmallestSteps(std::vector<TestNode> nodes)
-{
-    uint32_t smallest = UINT32_MAX;
-    uint8_t index = UINT8_MAX;
-    uint8_t i = 0;
-    for (auto n : nodes)
-    {
-        if (n.steps < smallest)
-        {
-            smallest = n.steps;
-            index = i;
-        }
-        i++;
-    }
-    return index;
-}
 
 void Part2(std::string instruction, std::map<std::string, Node> Nodes)
 {
@@ -89,7 +56,7 @@ void Part2(std::string instruction, std::map<std::string, Node> Nodes)
             TestNode temp;
             temp.name = n.first;
             TestNodes.push_back(temp);
-            printf("%s\n", n.first.c_str());
+            //printf("%s\n", n.first.c_str());
         }
     }
 
@@ -135,7 +102,6 @@ void Part2(std::string instruction, std::map<std::string, Node> Nodes)
 
     for (auto f : currentFactors)
     {
-
         total *= pow(f.first, f.second);
     }
 
@@ -177,7 +143,7 @@ int main()
         Nodes[temp_string] = temp_node;
     }
 
-    //Part1(instruction, Nodes);
+    Part1(instruction, Nodes);
 
     Part2(instruction, Nodes);
 }

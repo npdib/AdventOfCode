@@ -15,9 +15,10 @@ typedef struct coord_t
     uint16_t y_exp = 0;
 } CoOrd;
 
-Matrix createUniverse(std::vector<CoOrd>& galaxies)
+std::vector<CoOrd> createUniverse(void)
 {
     Matrix universe;
+    std::vector<CoOrd> galaxies;
     std::string line;
     std::ifstream input("input.txt");
 
@@ -93,7 +94,7 @@ Matrix createUniverse(std::vector<CoOrd>& galaxies)
         }
     }
 
-    return universe;
+    return galaxies;
 }
 
 uint64_t countSteps(std::vector<CoOrd> galaxies, uint32_t expansion_coefficient = 2)
@@ -135,16 +136,14 @@ uint64_t countSteps(std::vector<CoOrd> galaxies, uint32_t expansion_coefficient 
 
 void Part1(void)
 {
-    std::vector<CoOrd> galaxies;
-    Matrix universe = createUniverse(galaxies);
+    std::vector<CoOrd> galaxies = createUniverse();
 
     printf("the total for part 1 is:\t%llu\n", countSteps(galaxies));
 }
 
 void Part2(void)
 {
-    std::vector<CoOrd> galaxies;
-    Matrix universe = createUniverse(galaxies);
+    std::vector<CoOrd> galaxies = createUniverse();
 
     printf("the total for part 2 is:\t%llu\n", countSteps(galaxies, 1000000));
 }

@@ -90,30 +90,30 @@ Direction getNewDirection(char point, Direction currentDir)
 {
 	switch (point)
 	{
-	case '|':
-		break;
-	case '-':
-		break;
-	case 'L':
-		if (currentDir == Left)
-			return Above;
-		return Right;
-		break;
-	case 'J':
-		if (currentDir == Right)
-			return Above;
-		return Left;
-		break;
-	case '7':
-		if (currentDir == Right)
-			return Below;
-		return Left;
-		break;
-	case 'F':
-		if (currentDir == Left)
-			return Below;
-		return Right;
-		break;
+		case '|':
+			break;
+		case '-':
+			break;
+		case 'L':
+			if (currentDir == Left)
+				return Above;
+			return Right;
+			break;
+		case 'J':
+			if (currentDir == Right)
+				return Above;
+			return Left;
+			break;
+		case '7':
+			if (currentDir == Right)
+				return Below;
+			return Left;
+			break;
+		case 'F':
+			if (currentDir == Left)
+				return Below;
+			return Right;
+			break;
 	}
 	return currentDir;
 }

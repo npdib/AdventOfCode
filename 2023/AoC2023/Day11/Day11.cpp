@@ -15,7 +15,7 @@ typedef struct coord_t
     uint16_t y_exp = 0;
 } CoOrd;
 
-std::vector<CoOrd> createUniverse(void)
+std::vector<CoOrd> getGalaxies(void)
 {
     Matrix universe;
     std::vector<CoOrd> galaxies;
@@ -136,14 +136,14 @@ uint64_t countSteps(std::vector<CoOrd> galaxies, uint32_t expansion_coefficient 
 
 void Part1(void)
 {
-    std::vector<CoOrd> galaxies = createUniverse();
+    std::vector<CoOrd> galaxies = getGalaxies();
 
     printf("the total for part 1 is:\t%llu\n", countSteps(galaxies));
 }
 
 void Part2(void)
 {
-    std::vector<CoOrd> galaxies = createUniverse();
+    std::vector<CoOrd> galaxies = getGalaxies();
 
     printf("the total for part 2 is:\t%llu\n", countSteps(galaxies, 1000000));
 }

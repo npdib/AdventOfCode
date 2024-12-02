@@ -12,14 +12,18 @@ public:
     InputTaker operator=(InputTaker&) = delete;
     InputTaker& operator=(InputTaker&&) = delete;
 
-    ~InputTaker();
+    static std::string readAll();
+    std::string readLine();
+    bool moreToRead() const;
 
-    std::string getAll() const;
+    void reset();
+
     friend std::ostream& operator<<(std::ostream& os, const InputTaker& it);
 
 private:
     InputTaker();
+    ~InputTaker();
 
 private:
-    std::fstream file;
+    std::fstream m_file;
 };

@@ -10,29 +10,53 @@ InputTaker& InputTaker::get()
 
 InputTaker::~InputTaker()
 {
-    file.close();
+    m_file.close();
 }
 
-std::string InputTaker::getAll() const
+std::string InputTaker::readAll()
 {
+    std::fstream file("input.txt");
     std::stringstream output;
 
     while (file.good())
     {
-        char c = const_cast<std::fstream&>(file).get();
+        char c = file.get();
         output << c;
     }
 
+    file.close();
     return output.str();
+}
+
+std::string InputTaker::readLine()
+{
+    std::string line;
+    std::getline(m_file, line);
+    return line;
+}
+
+bool InputTaker::moreToRead() const
+{
+    return m_file.good();
+}
+
+void InputTaker::reset()
+{
+    m_file.close();
+    m_file.open("input.txt");
 }
 
 InputTaker::InputTaker()
 {
-    file.open("input.txt");
+    m_file.open("input.txt");
 }
 
 std::ostream& operator<<(std::ostream& os, const InputTaker& it)
 {
-    os << it.getAll();
+    std::string str;
+    if (it.m_file.is_open())
+        const_cast<std::fstream&>(it.m_file) >> str;
+
+    os << str;
     return os;
 }

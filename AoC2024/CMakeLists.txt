@@ -13,3 +13,4 @@ project ("AoC2024")
 # Include sub-projects.
 add_subdirectory ("shared")
 add_subdirectory ("Day1")
+add_subdirectory ("Day2")

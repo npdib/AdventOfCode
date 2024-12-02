@@ -2,11 +2,12 @@
 //
 
 #include "Day1.h"
-
-using namespace std;
+#include <iostream>
+#include "inputtaker.h"
 
 int main()
 {
-	cout << "Hello CMake." << endl;
+    std::cout << InputTaker::get().getAll();
+
 	return 0;
 }

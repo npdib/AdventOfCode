@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : CMake project for Day1, include source and define
 
 # Add source to this project's executable.
-add_executable (Day2 "main.cpp" "part1.cpp" "part2.cpp" )
+add_executable (Day2 "main.cpp" "part1.cpp" "part2.cpp" "common.cpp" "common.h")
 
 target_link_libraries(Day2 PUBLIC shared)
 target_include_directories(Day2 PUBLIC "${PROJECT_SOURCE_DIR}/shared")

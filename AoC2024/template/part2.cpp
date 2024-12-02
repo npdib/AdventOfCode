@@ -1,11 +1,7 @@
-﻿// Day1.cpp : Defines the entry point for the application.
-//
+﻿// part2.cpp
+// code specific to part 2
 
-#include <iostream>
-#include <sstream>
-#include <cstdint>
-
-#include "inputtaker.h"
+#include "common.h"
 
 std::string part2()
 {

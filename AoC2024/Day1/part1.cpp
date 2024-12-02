@@ -12,8 +12,6 @@ std::string part1()
 {
     std::list<int32_t> leftList, rightList;
 
-	std::string input = InputTaker::readAll();
-
 	while (InputTaker::get().moreToRead())
 	{
 	    std::string line = InputTaker::get().readLine();

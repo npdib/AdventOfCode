@@ -8,11 +8,11 @@ std::string part2();
 
 int main()
 {
-	std::cout << part1() << std::endl;
+	std::cout << "Part 1:\t"  << part1() << std::endl;
 
 	InputTaker::get().reset();
 
-	std::cout << part2() << std::endl;
+	std::cout << "Part 2:\t" << part2() << std::endl;
 
     return 0;
 }

@@ -5,8 +5,6 @@
 
 std::string part1()
 {
-	std::stringstream retStr;
-
 	uint16_t numSafe = 0;
 
 	while (InputTaker::get().moreToRead())
@@ -28,6 +26,7 @@ std::string part1()
 			++numSafe;
 	}
 
+	std::stringstream retStr;
 	retStr << "number of safe reports is " << numSafe << std::endl;
 
 	return retStr.str();

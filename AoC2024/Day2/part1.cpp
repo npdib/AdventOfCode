@@ -9,7 +9,7 @@ std::string part1()
 
 	while (InputTaker::get().moreToRead())
 	{
-	    std::vector<uint16_t> nums = getNumbers(InputTaker::get().readLine());
+	    std::vector<uint16_t> nums = util::getNumbersFromLine(InputTaker::get().readLine());
 
 		const int8_t ascending = nums[1] > nums[0] ? 1 : -1;
 		bool safe = true;

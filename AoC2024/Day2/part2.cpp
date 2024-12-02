@@ -40,7 +40,7 @@ std::string part2()
 
 	while (InputTaker::get().moreToRead())
 	{
-		if (isSafe(getNumbers(InputTaker::get().readLine())))
+		if (isSafe(util::getNumbersFromLine(InputTaker::get().readLine())))
 			++numSafe;
 	}
 

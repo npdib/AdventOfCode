@@ -24,13 +24,6 @@ typedef struct position_t
     int16_t x;
     int16_t y;
 
-    position_t& operator+=(const Direction& dir)
-    {
-        x += dir.del_x;
-        y += dir.del_y;
-        return *this;
-    }
-
     position_t operator+(const Direction& dir) const
     {
         return {static_cast<int16_t>(x + dir.del_x), static_cast<int16_t>(y + dir.del_y)};

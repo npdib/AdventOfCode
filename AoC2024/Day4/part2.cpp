@@ -5,15 +5,15 @@
 
 namespace Part2
 {
-    uint8_t validXMAS(const Matrix& grid, Position pos)
+    uint8_t validXMAS(const Matrix& grid, Pos pos)
     {
         if (grid[pos] != 'A')
             return 0;
 
-        constexpr Direction UL = {-1, -1};
-        constexpr Direction UR = {1, -1};
-        constexpr Direction DL = {-1, 1};
-        constexpr Direction DR = {1, 1};
+        constexpr Vec UL = {-1, -1};
+        constexpr Vec UR = {1, -1};
+        constexpr Vec DL = {-1, 1};
+        constexpr Vec DR = {1, 1};
 
         if ((grid[pos + UL] != 'M' && grid[pos + UL] != 'S')
             || (grid[pos + UR] != 'M' && grid[pos + UR] != 'S'))

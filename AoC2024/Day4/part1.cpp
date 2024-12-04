@@ -5,7 +5,7 @@
 
 namespace Part1
 {
-    uint8_t validXMAS(const Matrix& grid, Position pos)
+    uint8_t validXMAS(const Matrix& grid, Pos pos)
     {
         if (grid[pos] != 'X')
             return 0;
@@ -19,11 +19,11 @@ namespace Part1
                 if (u == 0 && v == 0)
                     continue;
 
-                Direction dir(u, v);
+                Vec dir(u, v);
 
-                const Position finalPos = pos + (dir * 3);
+                const Pos finalPos = pos + (dir * 3);
 
-                if (finalPos.x < 0 || finalPos.x >= grid.at(0).size())
+                if (finalPos.x < 0 || finalPos.x >= grid[0].size())
                     continue;
 
                 if (finalPos.y < 0 || finalPos.y >= grid.size())
@@ -52,7 +52,7 @@ namespace Part1
 
         for (int16_t j = 0; j < grid.size(); ++j)
         {
-            for (int16_t i = 0; i < grid.at(j).size(); ++i)
+            for (int16_t i = 0; i < grid[j].size(); ++i)
             {
                 sum += validXMAS(grid, {i, j});
             }

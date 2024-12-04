@@ -3,16 +3,21 @@
 #include "inputtaker.h"
 #include <iostream>
 
-std::string part1();
-std::string part2();
-
+namespace Part1
+{
+	std::string run();
+}
+namespace Part2
+{
+	std::string run();
+}
 int main()
 {
-	std::cout << "Part 1:\t"  << part1() << std::endl;
+	std::cout << "Part 1:\t"  << Part1::run() << std::endl;
 
 	InputTaker::get().reset();
 
-	std::cout << "Part 2:\t" << part2() << std::endl;
+	std::cout << "Part 2:\t" << Part2::run() << std::endl;
 
     return 0;
 }

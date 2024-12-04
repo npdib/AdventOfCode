@@ -3,10 +3,13 @@
 
 #include "common.h"
 
-std::string part1()
+namespace Part1
 {
-	std::stringstream retStr;
-	retStr << "template return string for part 1" << std::endl;
+	std::string run()
+	{
+		std::stringstream retStr;
+		retStr << "template return string for part 1" << std::endl;
 
-	return retStr.str();
+		return retStr.str();
+	}
 }

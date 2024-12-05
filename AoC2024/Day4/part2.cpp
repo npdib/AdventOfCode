@@ -5,7 +5,7 @@
 
 namespace Part2
 {
-    uint8_t validXMAS(const Matrix& grid, Pos pos)
+    uint8_t validXmas(const Matrix& grid, const Pos& pos)
     {
         if (grid[pos] != 'A')
             return 0;
@@ -45,11 +45,11 @@ namespace Part2
 
         uint16_t sum = 0;
 
-        for (int16_t j = 1; j < grid.size() - 1; ++j)
+        for (int j = 1; j < grid.size() - 1; ++j)
         {
-            for (int16_t i = 1; i < grid.at(j).size() - 1; ++i)
+            for (int i = 1; i < grid.at(j).size() - 1; ++i)
             {
-                sum += validXMAS(grid, {i, j});
+                sum += validXmas(grid, {i, j});
             }
         }
 

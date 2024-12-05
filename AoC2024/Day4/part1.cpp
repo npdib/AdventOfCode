@@ -3,9 +3,10 @@
 
 #include "common.h"
 
+
 namespace Part1
 {
-    uint8_t validXMAS(const Matrix& grid, Pos pos)
+    uint8_t validXmas(const Matrix& grid, const Pos& pos)
     {
         if (grid[pos] != 'X')
             return 0;
@@ -50,11 +51,11 @@ namespace Part1
 
         uint16_t sum = 0;
 
-        for (int16_t j = 0; j < grid.size(); ++j)
+        for (int j = 0; j < grid.size(); ++j)
         {
-            for (int16_t i = 0; i < grid[j].size(); ++i)
+            for (int i = 0; i < grid[j].size(); ++i)
             {
-                sum += validXMAS(grid, {i, j});
+                sum += validXmas(grid, {i, j});
             }
         }
 

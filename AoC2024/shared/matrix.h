@@ -1,30 +1,50 @@
 #pragma once
 
-#include <cstdint>
 #include <vector>
 #include <string>
 
-typedef struct vector_t
+class Vec
 {
-    int16_t x;
-    int16_t y;
-
-    vector_t operator*(const int& rhs)
+public:
+    constexpr Vec(int _x, int _y)
+        : x(_x)
+            , y(_y)
     {
-        return {static_cast<int16_t>(x * rhs), static_cast<int16_t>(y * rhs)};
     }
-} Vec;
 
-typedef struct position_t
+    Vec operator*(const int& rhs) const
+    {
+        return {x * rhs, y * rhs};
+    }
+
+    int x;
+    int y;
+};
+
+class Pos
 {
-    int16_t x;
-    int16_t y;
-
-    position_t operator+(const Vec& dir) const
+public:
+    constexpr Pos(int _x, int _y)
+        : x(_x)
+            , y(_y)
     {
-        return {static_cast<int16_t>(x + dir.x), static_cast<int16_t>(y + dir.y)};
     }
-} Pos;
+
+    Pos& operator+=(const Vec& rhs)
+    {
+        x += rhs.x;
+        y += rhs.y;
+        return *this;
+    }
+
+    Pos operator+(const Vec& rhs) const
+    {
+        return {x + rhs.x, y + rhs.y};
+    }
+
+    int x;
+    int y;
+};
 
 class Matrix : public std::vector<std::string>
 {

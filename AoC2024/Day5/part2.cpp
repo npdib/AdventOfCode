@@ -28,13 +28,11 @@ namespace Part2
 			else if (line[2] == ',')
 			{
 			    size_t index = 0;
-
 				std::vector<uint16_t> nums;
 
 				while (index <= line.size())
 				{
 				    nums.push_back(std::stoi(line.substr(index, 2)));
-
 					index += 3;
 				}
 

@@ -18,4 +18,37 @@ namespace util
 
 	    return nums;
     }
+
+	void SimpleTimer::start()
+	{
+	    m_start = std::chrono::steady_clock::now();
+		m_running = true;
+	}
+
+	void SimpleTimer::stop()
+    {
+	    m_stop = std::chrono::steady_clock::now();
+		m_running = false;
+    }
+
+	auto SimpleTimer::duration() const
+    {
+	    return std::chrono::duration_cast<std::chrono::milliseconds>(m_stop - m_start);
+    }
+
+	
+    std::ostream& operator<<(std::ostream& os, SimpleTimer& tim)
+    {
+	    if (!tim.running())
+	    {
+		    tim.start();
+	    }
+	    else
+	    {
+		    tim.stop();
+		    os << " -\t" << tim.duration();
+	    }
+
+	    return os;
+    }
 }

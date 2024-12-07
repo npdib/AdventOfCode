@@ -28,6 +28,22 @@ std::string InputTaker::readAll()
     return output.str();
 }
 
+std::vector<std::string> InputTaker::readAllAsVector()
+{
+    std::fstream file("input.txt");
+    std::vector<std::string> vector;
+
+    while (file.good())
+    {
+        std::string line;
+        std::getline(file, line);
+        vector.emplace_back(line);
+    }
+
+    file.close();
+    return vector;
+}
+
 std::string InputTaker::readLine()
 {
     std::string line;

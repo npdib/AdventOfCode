@@ -17,6 +17,16 @@ public:
         return {x * rhs, y * rhs};
     }
 
+    Vec operator-(const Vec& rhs) const
+    {
+        return {x - rhs.x, y - rhs.y};
+    }
+
+    Vec operator+(const Vec& rhs) const
+    {
+        return {x + rhs.x, y + rhs.y};
+    }
+
     int x;
     int y;
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fstream>
+#include <vector>
 
 class InputTaker
 {
@@ -13,6 +14,7 @@ public:
     InputTaker& operator=(InputTaker&&) = delete;
 
     static std::string readAll();
+    static std::vector<std::string> readAllAsVector();
     std::string readLine();
     bool moreToRead() const;
 

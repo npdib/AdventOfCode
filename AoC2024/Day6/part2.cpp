@@ -7,8 +7,13 @@ namespace Part2
 {
 	std::string run()
 	{
+		Map map(InputTaker::readAllAsVector());
+
+		while (map.update(true) == Map::UpdateState::Running) ;
+		    //std::cout << map << "------------------------------";
+
 		std::stringstream retStr;
-		retStr << "template return string for part 2" << std::endl;
+		retStr << "guard could have been in " << map.getNumberOfLoops() << " loops" << std::endl;
 
 		return retStr.str();
 	}

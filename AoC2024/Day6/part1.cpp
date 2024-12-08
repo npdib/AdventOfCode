@@ -9,7 +9,7 @@ namespace Part1
 	{
 		Map map(InputTaker::readAllAsVector());
 
-		while (!map.update()) ;
+		while (map.update() == Map::UpdateState::Running) ;
 		    //std::cout << map << "------------------------------";
 
 		std::stringstream retStr;

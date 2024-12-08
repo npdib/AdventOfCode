@@ -3,6 +3,12 @@
 
 #include "common.h"
 
+Guard::Guard()
+    : m_guardLocation({0, 0})
+        , m_guardDirection(Direction::Up)
+{
+}
+
 Guard::Guard(const Vec& pos, const char& dir)
     : m_guardLocation(pos)
 {
@@ -26,22 +32,18 @@ Guard::Guard(const Vec& pos, const char& dir)
     }
 }
 
-Vec Guard::getNextLocation() const
+Vec Guard::getDirection() const
 {
     switch (m_guardDirection)
     {
     case Direction::Up:
-        return (m_guardLocation - Vec(0, 1));
-        break;
+        return {0, -1};
     case Direction::Down:
-        return (m_guardLocation + Vec(0, 1));
-        break;
+        return {0, 1};
     case Direction::Left:
-        return (m_guardLocation - Vec(1, 0));
-        break;
+        return {-1, 0};
     case Direction::Right:
-        return (m_guardLocation + Vec(1, 0));
-        break;
+        return {1, 0};
     }
 
     return {0, 0};
@@ -88,64 +90,95 @@ void Guard::rotate()
 Map::Map(const std::vector<std::string>& map)
     : m_map(map)
 {
-    findGuards();
+    findGuard();
 }
 
-void Map::findGuards()
+void Map::findGuard()
 {
     for (int i = 0; i < m_map.size(); ++i)
     {
         for (const auto& symbol : {'>', '<', '^', 'V'})
         {
-            size_t pos, prevPos = -1;
-            while ((pos = m_map[i].find(symbol, prevPos + 1)) != std::string::npos)
+            if (m_map[i].find(symbol) != std::string::npos)
             {
-                const Vec location = {static_cast<int>(pos), i};
+                const Vec location = {static_cast<int>(m_map[i].find(symbol)), i};
 
-                m_guards.emplace_back(location, symbol);
+                m_guard = Guard(location, symbol);
                 markAsPatrolled(location);
-                prevPos = pos;
+                addToHistory();
             }
         }
     }
 }
 
-bool Map::update()
+Map::UpdateState Map::update(bool isPart2)
 {
-    for (auto it = m_guards.begin(); !m_guards.empty() && it != m_guards.end();)
+    const Vec& nextLocation = m_guard.getLocation() + m_guard.getDirection();
+
+    if (m_history[{nextLocation.x, nextLocation.y}].contains({m_guard.getDirection().x, m_guard.getDirection().y}))
+        return UpdateState::RepeatedSquare;
+
+    if (!isValidLocation(nextLocation))
+        return UpdateState::OutOfBounds;
+
+    if (const char icon = m_map[nextLocation.y][nextLocation.x]; icon == '#')
     {
-        const Vec& nextLocation = it->getNextLocation();
+        m_guard.rotate();
+    }
+    else
+    {
+        // not already an obstacle so potential to see what happens if an obstacle is put there
 
-        if (nextLocation.x < 0 || nextLocation.x >= m_map[0].size()
-            || nextLocation.y < 0 || nextLocation.y >= m_map.size())
+        if (isPart2 && icon == '.') // require to have not been there before
         {
-            m_guards.erase(it);
-            continue;
+            MapCache cache(*this);
+
+            m_map[nextLocation.y][nextLocation.x] = '#';
+
+            m_guard.rotate();
+            addToHistory();
+
+            bool finished = false;
+            while (!finished)
+            {
+                switch (update())
+                {
+                case UpdateState::Running:
+                    break;
+                case UpdateState::RepeatedSquare:
+                    m_loops.insert({nextLocation.x, nextLocation.y});
+                    //std::cout << *this;
+                case UpdateState::OutOfBounds:
+                    finished = true;
+                    break;
+                }
+            }
         }
 
-        const char icon = m_map[nextLocation.y][nextLocation.x];
-
-        if (icon == '#')
-        {
-            it->rotate();
-        }
-        else
-        {
-            it->move();
-            if (icon == '.')
-                markAsPatrolled(nextLocation);
-        }
-
-        ++it;
+        m_guard.move();
+        if (icon == '.')
+            markAsPatrolled(nextLocation);
     }
 
-    return m_guards.empty();
+    addToHistory();
+    return UpdateState::Running;
+}
+
+bool Map::isValidLocation(const Vec& pos) const
+{
+    return (pos.x >= 0 && pos.x < m_map[0].size()
+            && pos.y >= 0 && pos.y < m_map.size());
 }
 
 void Map::markAsPatrolled(const Vec& pos)
 {
     m_map[pos.y][pos.x] = 'X';
     ++m_patrolledSquares;
+}
+
+void Map::addToHistory()
+{
+    m_history[{m_guard.getLocation().x, m_guard.getLocation().y}].insert({m_guard.getDirection().x, m_guard.getDirection().y});
 }
 
 std::ostream& operator<<(std::ostream& os, const Map& map)

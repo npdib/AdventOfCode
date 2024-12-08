@@ -2,10 +2,10 @@
 
 namespace util
 {
-    std::vector<uint16_t> getNumbersFromLine(const std::string& line)
+    std::vector<int> getNumbersFromLine(const std::string& line)
     {
 	    size_t spaceIndex = 0;
-	    std::vector<uint16_t> nums;
+	    std::vector<int> nums;
 
 	    do
 	    {

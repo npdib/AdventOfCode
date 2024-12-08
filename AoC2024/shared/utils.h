@@ -5,7 +5,7 @@
 
 namespace util
 {
-    std::vector<uint16_t> getNumbersFromLine(const std::string& line);
+    std::vector<int> getNumbersFromLine(const std::string& line);
 
     class SimpleTimer
     {

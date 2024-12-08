@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-bool isSafe(const std::vector<uint16_t>& nums, const bool recursed = false)
+bool isSafe(const std::vector<int>& nums, const bool recursed = false)
 {
     const int8_t ascending = nums[1] > nums[0] ? 1 : -1;
 	bool safe = true;
@@ -24,7 +24,7 @@ bool isSafe(const std::vector<uint16_t>& nums, const bool recursed = false)
 
 	for (int index = 0; index < nums.size(); ++index)
 	{
-	    std::vector<uint16_t> smallerNums = nums;
+	    std::vector<int> smallerNums = nums;
 		smallerNums.erase(smallerNums.begin() + index);
 
 		if (isSafe(smallerNums, true))

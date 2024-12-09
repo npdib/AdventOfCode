@@ -3,9 +3,9 @@
 
 #include "common.h"
 
-long long int calculateSum(const uint64_t& target, const std::vector<int>& numbers, const uint32_t& map)
+unsigned long long int calculateSum(const uint64_t& target, const std::vector<int>& numbers, const uint32_t& map)
 {
-    long long int sum = numbers[0];
+    unsigned long long int sum = numbers[0];
 
     for (size_t index = 1; index < numbers.size(); ++index)
     {

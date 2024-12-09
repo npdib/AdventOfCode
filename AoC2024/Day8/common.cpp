@@ -13,7 +13,7 @@ AntennaeGroup::AntennaeGroup(const char& c, const Matrix& map)
         while ((pos = map[y].find(c, prevPos + 1)) != std::string::npos)
         {
             prevPos = pos;
-            m_locations.emplace_back(pos, y);
+            m_locations.emplace_back(static_cast<int>(pos), y);
         }
     }
 

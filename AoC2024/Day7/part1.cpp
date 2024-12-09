@@ -7,7 +7,7 @@ namespace Part1
 {
 	std::string run()
 	{
-		long long int sum = 0;
+		unsigned long long int sum = 0;
 
 		while (InputTaker::get().moreToRead())
 		{
@@ -15,11 +15,11 @@ namespace Part1
 
 			const size_t colon = line.find(':');
 
-			const long long int target = std::stoll(line.substr(0, colon));
+			const unsigned long long int target = std::stoll(line.substr(0, colon));
 
 			std::vector<int> numbers = util::getNumbersFromLine(line.substr(colon + 1));
 
-			for (uint32_t map = 0; map < (1 << (numbers.size() - 1)); ++map)
+			for (uint32_t map = 0; map < static_cast<uint32_t>(1 << (numbers.size() - 1)); ++map)
 			{
 			    if (calculateSum(target, numbers, map) == target)
 			    {

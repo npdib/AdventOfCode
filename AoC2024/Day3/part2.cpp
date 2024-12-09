@@ -7,7 +7,7 @@ std::string part2()
 {
 	std::string input = InputTaker::readAll();
 
-	size_t pos, prev_pos = -1;
+	size_t prev_pos = -1;
 
 	int64_t sum = 0;
 

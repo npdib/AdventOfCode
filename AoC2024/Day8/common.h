@@ -24,7 +24,7 @@ private:
 
     [[nodiscard]] bool containedInGrid(const Vec& pos) const;
 
-    uint16_t m_mapWidth, m_mapHeight;
+    size_t m_mapWidth, m_mapHeight;
 
     std::vector<Vec> m_locations;
     std::set<std::tuple<int, int>> m_antinodes;

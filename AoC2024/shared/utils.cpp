@@ -1,5 +1,7 @@
 #include "utils.h"
 
+#include <iostream>
+
 namespace util
 {
     std::vector<int> getNumbersFromLine(const std::string& line)
@@ -19,7 +21,7 @@ namespace util
 	    return nums;
     }
 
-	void SimpleTimer::start()
+    void SimpleTimer::start()
 	{
 	    m_start = std::chrono::steady_clock::now();
 		m_running = true;
@@ -36,7 +38,15 @@ namespace util
 	    return std::chrono::duration_cast<std::chrono::milliseconds>(m_stop - m_start);
     }
 
-	
+	SimpleTimer::~SimpleTimer()
+    {
+		if (running())
+		{
+		    stop();
+		    std::cout << " -\t" << duration() << " when timer was destroyed\n";
+	    }
+    }
+
     std::ostream& operator<<(std::ostream& os, SimpleTimer& tim)
     {
 	    if (!tim.running())

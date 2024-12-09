@@ -10,6 +10,8 @@ namespace util
     class SimpleTimer
     {
     public:
+        ~SimpleTimer();
+
 	    void start();
 	    void stop();
 	    auto duration() const;

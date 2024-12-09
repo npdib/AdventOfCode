@@ -31,31 +31,6 @@ public:
     int y;
 };
 
-class Pos
-{
-public:
-    constexpr Pos(int _x, int _y)
-        : x(_x)
-            , y(_y)
-    {
-    }
-
-    Pos& operator+=(const Vec& rhs)
-    {
-        x += rhs.x;
-        y += rhs.y;
-        return *this;
-    }
-
-    Pos operator+(const Vec& rhs) const
-    {
-        return {x + rhs.x, y + rhs.y};
-    }
-
-    int x;
-    int y;
-};
-
 class Matrix : public std::vector<std::string>
 {
 public:
@@ -64,7 +39,7 @@ public:
         return std::vector<std::string>::operator[](pos);
     }
 
-    const char& operator[](const Pos& pos) const
+    const char& operator[](const Vec& pos) const
     {
         return (*this)[pos.x][pos.y];
     }

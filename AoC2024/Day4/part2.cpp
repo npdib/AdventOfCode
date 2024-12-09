@@ -5,7 +5,7 @@
 
 namespace Part2
 {
-    uint8_t validXmas(const Matrix& grid, const Pos& pos)
+    uint8_t validXmas(const Matrix& grid, const Vec& pos)
     {
         if (grid[pos] != 'A')
             return 0;

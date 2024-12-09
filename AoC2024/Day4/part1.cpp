@@ -6,7 +6,7 @@
 
 namespace Part1
 {
-    uint8_t validXmas(const Matrix& grid, const Pos& pos)
+    uint8_t validXmas(const Matrix& grid, const Vec& pos)
     {
         if (grid[pos] != 'X')
             return 0;
@@ -22,7 +22,7 @@ namespace Part1
 
                 Vec dir(u, v);
 
-                const Pos finalPos = pos + (dir * 3);
+                const Vec finalPos = pos + (dir * 3);
 
                 if (finalPos.x < 0 || finalPos.x >= grid[0].size())
                     continue;

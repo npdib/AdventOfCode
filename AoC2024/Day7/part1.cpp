@@ -2,7 +2,6 @@
 // code specific to part 1
 
 #include "common.h"
-#include "utils.h"
 
 namespace Part1
 {

@@ -34,6 +34,11 @@ public:
 class Matrix : public std::vector<std::string>
 {
 public:
+    bool isValidCoord(const Vec& pos) const
+    {
+        return pos.x >= 0 && pos.x < (*this)[0].size() && pos.y >= 0 && pos.y < size();
+    }
+
     const std::string& operator[](const size_type pos) const
     {
         return std::vector<std::string>::operator[](pos);
@@ -41,6 +46,6 @@ public:
 
     const char& operator[](const Vec& pos) const
     {
-        return (*this)[pos.x][pos.y];
+        return (*this)[pos.y][pos.x];
     }
 };

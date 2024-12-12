@@ -27,9 +27,22 @@ public:
         return {x + rhs.x, y + rhs.y};
     }
 
+    bool operator<(const Vec& rhs) const
+    {
+        if (x == rhs.x)
+            return y < rhs.y;
+
+        return x < rhs.x;
+    }
+
     int x;
     int y;
 };
+
+constexpr Vec up = {0, -1};
+constexpr Vec down = {0, 1};
+constexpr Vec left = {-1, 0};
+constexpr Vec right = {1, 0};
 
 class Matrix : public std::vector<std::string>
 {

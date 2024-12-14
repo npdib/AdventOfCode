@@ -20,7 +20,6 @@ public:
     uint32_t getSides() const;
 
 private:
-
     const char m_char;
     Matrix m_map;
     std::set<Vec> m_tiles;

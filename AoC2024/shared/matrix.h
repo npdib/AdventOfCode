@@ -74,7 +74,17 @@ public:
         return std::vector<std::string>::operator[](pos);
     }
 
+    std::string& operator[](const size_type pos)
+    {
+        return std::vector<std::string>::operator[](pos);
+    }
+
     const char& operator[](const Vec& pos) const
+    {
+        return (*this)[pos.y][pos.x];
+    }
+
+    char& operator[](const Vec& pos)
     {
         return (*this)[pos.y][pos.x];
     }

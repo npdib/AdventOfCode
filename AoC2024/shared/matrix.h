@@ -27,6 +27,23 @@ public:
         return {x + rhs.x, y + rhs.y};
     }
 
+    Vec& operator+=(const Vec& rhs)
+    {
+        *this = *this + rhs;
+        return *this;
+    }
+
+    Vec operator%(const Vec& rhs) const
+    {
+        return {x % rhs.x, y % rhs.y};
+    }
+
+    Vec& operator%=(const Vec& rhs)
+    {
+        *this = *this % rhs;
+        return *this;
+    }
+
     bool operator<(const Vec& rhs) const
     {
         if (x == rhs.x)
